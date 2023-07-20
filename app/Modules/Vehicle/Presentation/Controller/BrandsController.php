@@ -22,13 +22,26 @@ class BrandsController extends Controller
     }
 
     /**
-     *
+     * @group Vehicle
+     * @route [POST] /api/brands
+     * @title Cadatrar marca de carro
+     * @param CreateBrandUseCase $useCase
+     * @param CreateBrandRequest $request
+     * @return JsonResource
      */
     public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request): JsonResource
     {
         return CreateBrandResource::make($useCase->execute($request));
     }
 
+    /**
+     * @group Vehicle
+     * @route [POST] /api/brands
+     * @title Atualizar marca de carro
+     * @param UpdateBrandUseCase $useCase
+     * @param UpdateBrandRequest $request
+     * @return JsonResource
+     */
     public function update(UpdateBrandUseCase $useCase, UpdateBrandRequest $request, int $id): JsonResource
     {
         return CreateBrandResource::make($useCase->execute($request, $id));

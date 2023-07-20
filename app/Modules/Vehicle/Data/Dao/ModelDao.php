@@ -4,16 +4,17 @@ namespace App\Modules\Vehicle\Data\Dao;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BrandDao extends Model
+class ModelDao extends Model
 {
     use HasFactory;
 
-    protected $table = "brands";
+    protected $table = 'models';
 
     protected $fillable = [
-        'name'
+        'name',
+        'brand_id'
     ];
 
     protected $dates = [
@@ -25,8 +26,8 @@ class BrandDao extends Model
      * Associations
      */
 
-     protected function models(): HasMany
+     protected function brand(): BelongsTo
      {
-        return $this->hasMany(ModelDao::class, 'brand_id');
+        return $this->belongsTo(BrandDao::class, 'brand_id');
      }
 }

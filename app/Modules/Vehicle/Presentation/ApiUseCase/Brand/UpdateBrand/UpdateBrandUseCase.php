@@ -6,7 +6,7 @@ use App\Modules\Vehicle\Data\Dao\BrandDao;
 
 class UpdateBrandUseCase
 {
-    public function execute(UpdateBrandRequest $request, int $id)
+    public function execute(UpdateBrandRequest $request, int $id): BrandDao
     {
         $brand = BrandDao::findOrFail($id);
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Vehicle\Presentation\Controller\BrandsController;
+use App\Modules\Vehicle\Presentation\Controller\ModelsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,12 @@ Route::prefix('brands')->group(function () {
 
     Route::post('/', [BrandsController::class, 'store']);
     Route::put('/{id}', [BrandsController::class, 'update']);
+});
+
+Route::prefix('models')->group(function () {
+
+    Route::post('/', [ModelsController::class, 'store']);
+    Route::put('/{id}', [ModelsController::class, 'update']);
 });
 /*
 Route::prefix('brands', function () {
