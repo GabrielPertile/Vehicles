@@ -6,8 +6,9 @@
                 <h5 class="modal-title" id="updateBrandModalLabel">Editar marca</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="updateBrandModal" method="PUT" action="{{ route('brands.store') }}">
+            <form id="updateBrandForm" method="POST" action="">
                 @csrf
+                @method('PUT')
                 <div class="modal-body">
                     <div class="mb-3">
                         <label>Name</label>

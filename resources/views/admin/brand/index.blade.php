@@ -27,7 +27,7 @@
                                 <td>{{ $brand->id }}</td>
                                 <td>{{ $brand->name }}</td>
                                 <td class="float-right">
-                                    <button class="btn btn-sm btn-primary" id="updateBrandModalBtn"
+                                    <button class="btn btn-sm btn-primary" id="updateBrandModal"
                                         data-bs-target="#updateBrandModal"
                                         onclick="openEditDialog({{ $brand->id }})">Editar</button>
                                     <button class="btn btn-sm btn-danger">Remover</button>
@@ -41,12 +41,20 @@
         </div>
     </div>
     <script>
+        // Aqui seta valor
+        function openmodal() {
+
+            $('#brandModal').modal('show');
+
+            $('#name').val(null);
+        }
+
         function openEditDialog(brandId) {
             console.log(brandId);
             // Fetch the brand data using the show route
             $.ajax({
                 type: 'GET',
-                url: `api/brands/${brandId}`,
+                url: `/brands/${brandId}`,
 
                 dataType: 'json',
                 success: function(response) {
@@ -55,8 +63,8 @@
                     console.log(responseData);
 
                     $('#updateBrandModal').modal('show');
-                    // $('#updateBrandForm').attr('action', '/brands/' + responseData.id);
-                    $('#name').val(responseData.name);
+                    $('#updateBrandForm').attr('action', '/brands/' + responseData.id);
+                    $('#upname').val(responseData.name);
                     $('#brandId').val(responseData.id);
                 },
                 error: function(xhr) {

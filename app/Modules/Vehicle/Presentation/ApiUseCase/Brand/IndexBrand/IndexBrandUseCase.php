@@ -8,11 +8,11 @@ class IndexBrandUseCase
 {
     public function execute(IndexBrandRequest $request)
     {
-        $query = BrandDao::query();
+        $query = BrandDao::all();
 
         // Aplicar sortable
 
-        $query = $query->paginate($request->pageSize, ['*'], 'page', $request->pageNumber);
+        // $query = $query->paginate($request->pageSize, ['*'], 'page', $request->pageNumber);
 
         return $query;
     }

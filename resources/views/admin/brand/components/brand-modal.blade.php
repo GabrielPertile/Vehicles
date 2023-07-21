@@ -6,12 +6,12 @@
                 <h5 class="modal-title" id="brandModalLabel">Nova marca</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="brandForm" method="post" action="{{ route('brands.store') }}">
+            <form id="brandForm" method="POST" action="{{ route('brands.store') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label>Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required
+                        <input type="text" class="form-control" id="upname" name="upname" required
                             class="@error('name') is-invalid @enderror">
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
