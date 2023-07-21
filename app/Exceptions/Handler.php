@@ -52,91 +52,91 @@ class Handler extends ExceptionHandler
     }
 
     // TODO colocar translator para retorno de mensagens
-    public function render($request, Exception|Throwable $e)
-    {
-        $translator = new Translator();
-        switch (true) {
-            case $e instanceof MethodNotAllowedHttpException:
-                $message = '';
-                if (str_contains($e->getMessage(), 'method is not supported')) {
-                    $message = $translator->translate('exception.method_is_not_supported');
-                } else if (is_null($e->getMessage())) {
-                    $message = $e->getMessage();
-                } else {
-                    $message = $e->getMessage();
-                }
-                return response()->json([
-                    'data' => [
-                        'message' => $message,
-                    ],
-                ], Response::HTTP_NOT_FOUND);
-                break;
+    // public function render($request, Exception|Throwable $e)
+    // {
+    //     $translator = new Translator();
+    //     switch (true) {
+    //         case $e instanceof MethodNotAllowedHttpException:
+    //             $message = '';
+    //             if (str_contains($e->getMessage(), 'method is not supported')) {
+    //                 $message = $translator->translate('exception.method_is_not_supported');
+    //             } else if (is_null($e->getMessage())) {
+    //                 $message = $e->getMessage();
+    //             } else {
+    //                 $message = $e->getMessage();
+    //             }
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => $message,
+    //                 ],
+    //             ], Response::HTTP_NOT_FOUND);
+    //             break;
 
-            case $e instanceof NotFoundHttpException:
-                return response()->json([
-                    'data' => [
-                        'message' => $translator->translate('exception.action_not_found'),
-                    ],
-                ], Response::HTTP_NOT_FOUND);
+    //         case $e instanceof NotFoundHttpException:
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => $translator->translate('exception.action_not_found'),
+    //                 ],
+    //             ], Response::HTTP_NOT_FOUND);
 
-                break;
+    //             break;
 
-            case $e instanceof ValidationException:
-                return response()->json([
-                    'data' => [
-                        'message' => $translator->translate('validation.validation_exception.invalid'),
-                        'errors' => $e->errors(),
-                    ],
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+    //         case $e instanceof ValidationException:
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => $translator->translate('validation.validation_exception.invalid'),
+    //                     'errors' => $e->errors(),
+    //                 ],
+    //             ], Response::HTTP_UNPROCESSABLE_ENTITY);
 
-                break;
+    //             break;
 
-            case $e instanceof TypeError:
-                return response()->json([
-                    'data' => [
-                        'message' => $translator->translate('exception.invalid_type'),
-                    ],
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
-                break;
+    //         case $e instanceof TypeError:
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => $translator->translate('exception.invalid_type'),
+    //                 ],
+    //             ], Response::HTTP_UNPROCESSABLE_ENTITY);
+    //             break;
 
-            case $e instanceof ModelNotFoundException:
-                $message = $translator->translate('exception.no_query_results');
-                return response()->json([
-                    'data' => [
-                        'message' => $message,
-                    ],
-                ], Response::HTTP_NOT_FOUND);
-                break;
+    //         case $e instanceof ModelNotFoundException:
+    //             $message = $translator->translate('exception.no_query_results');
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => $message,
+    //                 ],
+    //             ], Response::HTTP_NOT_FOUND);
+    //             break;
 
-            case $e instanceof Exception:
-                $message = '';
-                if (str_contains($e->getMessage(), 'HTTP_INTERNAL_SERVER_ERROR')) {
-                   return response()->json([
-                       'data' => [
-                           'message' => $translator->translate('exception.http_internal_server_error'),
-                       ],
-                   ], Response::HTTP_INTERNAL_SERVER_ERROR);
-                } else
-                if (str_contains($e->getMessage(), 'exception.')) {
-                    $message = $translator->translate($e->getMessage());
-                } else
-                if (str_contains($e->getMessage(), 'No query results for')) {
-                    $message = $translator->translate('exception.no_query_results');
-                } else
-                if(str_contains($e->getMessage(), 'SQLSTATE')) {
-                    $message = $translator->translate('exception.database_error');
-                }
-                else {
-                    $message = $e->getMessage();
-                }
-                return response()->json([
-                    'data' => [
-                        'message' => !str_contains($message, ' CPF ') && !str_contains($message, ' cadastro ') ? $message : "Ops! Algumas informações estão erradas, por favor conferir.",
-                        'errors' => (str_contains($message, ' CPF ') ? ['cpf' => [$message]] : (str_contains($message, ' cadastro ') ? ['email' => [$message]] : []))
-                    ],
-                ], Response::HTTP_NOT_FOUND);
-        }
+    //         case $e instanceof Exception:
+    //             $message = '';
+    //             if (str_contains($e->getMessage(), 'HTTP_INTERNAL_SERVER_ERROR')) {
+    //                return response()->json([
+    //                    'data' => [
+    //                        'message' => $translator->translate('exception.http_internal_server_error'),
+    //                    ],
+    //                ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    //             } else
+    //             if (str_contains($e->getMessage(), 'exception.')) {
+    //                 $message = $translator->translate($e->getMessage());
+    //             } else
+    //             if (str_contains($e->getMessage(), 'No query results for')) {
+    //                 $message = $translator->translate('exception.no_query_results');
+    //             } else
+    //             if(str_contains($e->getMessage(), 'SQLSTATE')) {
+    //                 $message = $translator->translate('exception.database_error');
+    //             }
+    //             else {
+    //                 $message = $e->getMessage();
+    //             }
+    //             return response()->json([
+    //                 'data' => [
+    //                     'message' => !str_contains($message, ' CPF ') && !str_contains($message, ' cadastro ') ? $message : "Ops! Algumas informações estão erradas, por favor conferir.",
+    //                     'errors' => (str_contains($message, ' CPF ') ? ['cpf' => [$message]] : (str_contains($message, ' cadastro ') ? ['email' => [$message]] : []))
+    //                 ],
+    //             ], Response::HTTP_NOT_FOUND);
+    //     }
 
-        return parent::render($request,$e);
-    }
+    //     return parent::render($request,$e);
+    // }
 }

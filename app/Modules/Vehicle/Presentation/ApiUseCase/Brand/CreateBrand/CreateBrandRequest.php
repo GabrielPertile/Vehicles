@@ -28,4 +28,10 @@ class CreateBrandRequest extends FormRequest
             ]
         ];
     }
+
+    public function redirect()
+    {
+        dd('entrou aqui');
+        return redirect()->to(route('brands'));
+    }
 }

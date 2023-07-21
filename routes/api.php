@@ -21,28 +21,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('brands')->group(function () {
+// Route::prefix('brands')->group(function () {
 
-    Route::get('/', [BrandsController::class, 'index']);
-    Route::get('/{id}', [BrandsController::class, 'show']);
-    Route::post('/', [BrandsController::class, 'store']);
-    Route::put('/{id}', [BrandsController::class, 'update']);
-});
+//     Route::get('/', [BrandsController::class, 'index'])->name('brands.index');
+//     Route::get('/{id}', [BrandsController::class, 'show'])->name('brands.show');
+//     Route::post('/', [BrandsController::class, 'store'])->name('brands.store');
+//     Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
+// });
 
 Route::prefix('models')->group(function () {
 
-    Route::get('/', [ModelsController::class, 'index']);
-    Route::get('/{id}', [ModelsController::class, 'show']);
-    Route::post('/', [ModelsController::class, 'store']);
-    Route::put('/{id}', [ModelsController::class, 'update']);
+    Route::get('/', [ModelsController::class, 'index'])->name('models.index');
+    Route::get('/{id}', [ModelsController::class, 'show'])->name('models.show');
+    Route::post('/', [ModelsController::class, 'store'])->name('models.store');
+    Route::put('/{id}', [ModelsController::class, 'update'])->name('models.update');
 });
 
 Route::prefix('vehicles')->group(function () {
 
-    Route::get('/', [VehiclesController::class, 'index']);
-    Route::get('/{id}', [VehiclesController::class, 'show']);
-    Route::post('/', [VehiclesController::class, 'store']);
-    Route::put('/{id}', [VehiclesController::class, 'update']);
+    Route::get('/', [VehiclesController::class, 'index'])->name('vehicles.index');
+    Route::get('/{id}', [VehiclesController::class, 'show'])->name('vehicles.show');
+    Route::post('/', [VehiclesController::class, 'store'])->name('vehicles.store');
+    Route::put('/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');
 });
 /*
 Route::prefix('brands', function () {

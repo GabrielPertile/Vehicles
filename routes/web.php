@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Vehicle\Presentation\Controller\BrandsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
+
+// Route::get('/brands', [BrandsController::class, 'index']);
+
+Route::prefix('brands')->group(function () {
+
+    Route::get('/', [BrandsController::class, 'index'])->name('brands.index');
+    Route::get('/{id}', [BrandsController::class, 'show'])->name('brands.show');
+    Route::post('/', [BrandsController::class, 'store'])->name('brands.store');
+    Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
+});
+

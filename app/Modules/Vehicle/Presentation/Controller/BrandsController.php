@@ -3,6 +3,7 @@
 namespace App\Modules\Vehicle\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Vehicle\Data\Dao\BrandDao;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\ShowBrand\ShowBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandRequest;
@@ -26,9 +27,16 @@ class BrandsController extends Controller
      * @param IndexBrandRequest $request
      * @return JsonResource
      */
-    public function index(IndexBrandUseCase $useCase, IndexBrandRequest $request): JsonResource
+    public function index(IndexBrandUseCase $useCase, IndexBrandRequest $request)
     {
-        return IndexBrandResource::collection($useCase->execute($request));
+        $brands = IndexBrandResource::collection($useCase->execute($request));
+        // dd(array_values($brands->toArray($request)));
+        // $brands = $brands->toArray($request);
+        // dd(compact('brands'));
+        return view(
+            'admin.brand.index',
+            compact('brands')
+        );
     }
 
     /**
@@ -54,6 +62,7 @@ class BrandsController extends Controller
      */
     public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request): JsonResource
     {
+        // return redirect()->to(route('/brands'));
         return CreateBrandResource::make($useCase->execute($request));
     }
 
