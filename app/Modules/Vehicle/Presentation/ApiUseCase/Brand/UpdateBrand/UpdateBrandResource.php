@@ -16,6 +16,7 @@ class UpdateBrandResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'message' => $translator->translate('app.vehicle.api_use_case.brand.update.success'),
             'id' => $this->id,
             'name' => $this->name,
         ];

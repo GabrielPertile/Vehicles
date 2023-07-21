@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand;
+namespace App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\UpdateVehicle;
 
 use App\Libraries\Translator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CreateBrandResource extends JsonResource
+class UpdateVehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,7 @@ class CreateBrandResource extends JsonResource
     {
         $translator = new Translator();
         return [
-            'message' => $translator->translate('app.vehicle.api_use_case.brand.store.success'),
-            'id' => $this->id,
-            'name' => $this->name,
+            'message' => $translator->translate('app.vehicle.api_use_case.vehicle.update.success'),
         ];
     }
 }

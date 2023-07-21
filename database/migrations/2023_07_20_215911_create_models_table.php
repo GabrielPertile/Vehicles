@@ -18,9 +18,9 @@ return new class extends Migration
                 ->nullable(false);
 
             $table->foreignId('brand_id')
-                ->nullable()
+                ->nullable(false)
                 ->constrained('brands')
-                ->nullOnDelete();
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });

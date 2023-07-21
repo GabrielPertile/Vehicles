@@ -1,9 +1,10 @@
 <?php
 
-use App\Modules\Vehicle\Presentation\Controller\BrandsController;
-use App\Modules\Vehicle\Presentation\Controller\ModelsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Modules\Vehicle\Presentation\Controller\BrandsController;
+use App\Modules\Vehicle\Presentation\Controller\ModelsController;
+use App\Modules\Vehicle\Presentation\Controller\VehiclesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::prefix('models')->group(function () {
     Route::get('/', [ModelsController::class, 'index']);
     Route::post('/', [ModelsController::class, 'store']);
     Route::put('/{id}', [ModelsController::class, 'update']);
+});
+
+Route::prefix('vehicles')->group(function () {
+
+    Route::get('/', [VehiclesController::class, 'index']);
+    Route::post('/', [VehiclesController::class, 'store']);
+    Route::put('/{id}', [VehiclesController::class, 'update']);
 });
 /*
 Route::prefix('brands', function () {
