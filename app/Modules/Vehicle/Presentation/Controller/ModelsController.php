@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelUseCase;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelRequest;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelUseCase;
@@ -13,6 +16,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ModelsController extends Controller
 {
+
+    public function index(IndexModelUseCase $useCase, IndexModelRequest $request): JsonResource
+    {
+        return IndexModelResource::collection($useCase->execute($request));
+    }
 
     /**
      * @group Vehicle

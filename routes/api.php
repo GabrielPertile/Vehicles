@@ -22,12 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('brands')->group(function () {
 
+    Route::get('/', [BrandsController::class, 'index']);
     Route::post('/', [BrandsController::class, 'store']);
     Route::put('/{id}', [BrandsController::class, 'update']);
 });
 
 Route::prefix('models')->group(function () {
 
+    Route::get('/', [ModelsController::class, 'index']);
     Route::post('/', [ModelsController::class, 'store']);
     Route::put('/{id}', [ModelsController::class, 'update']);
 });
