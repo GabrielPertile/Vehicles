@@ -20,7 +20,7 @@ class CreateVehicleResource extends JsonResource
         return [
             'message' => $translator->translate('app.vehicle.api_use_case.vehicle.store.success'),
             'id' => $this->id,
-            'name' => $this->name,
+            'description' => $this->description,
         ];
     }
 }

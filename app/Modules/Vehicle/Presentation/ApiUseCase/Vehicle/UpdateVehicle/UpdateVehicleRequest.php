@@ -27,7 +27,8 @@ class UpdateVehicleRequest extends FormRequest
                 Rule::exists('models', 'id')
                     ->where('brand_id', $this->brand_id)
             ],
-            'price' => 'required|numeric|gt:0'
+            'price' => 'required|numeric|gt:0',
+            'image' => 'nullable',
         ];
     }
 }

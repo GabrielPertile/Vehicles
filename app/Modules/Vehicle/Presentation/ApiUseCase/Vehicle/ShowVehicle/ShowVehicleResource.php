@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\IndexVehicle;
+namespace App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle;
 
 use Illuminate\Http\Request;
 use App\Libraries\Translator;
@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelResource;
 
-class IndexVehicleResource extends JsonResource
+class ShowVehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

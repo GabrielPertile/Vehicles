@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('brands')->group(function () {
 
     Route::get('/', [BrandsController::class, 'index']);
+    Route::get('/{id}', [BrandsController::class, 'show']);
     Route::post('/', [BrandsController::class, 'store']);
     Route::put('/{id}', [BrandsController::class, 'update']);
 });
@@ -31,6 +32,7 @@ Route::prefix('brands')->group(function () {
 Route::prefix('models')->group(function () {
 
     Route::get('/', [ModelsController::class, 'index']);
+    Route::get('/{id}', [ModelsController::class, 'show']);
     Route::post('/', [ModelsController::class, 'store']);
     Route::put('/{id}', [ModelsController::class, 'update']);
 });
@@ -38,6 +40,7 @@ Route::prefix('models')->group(function () {
 Route::prefix('vehicles')->group(function () {
 
     Route::get('/', [VehiclesController::class, 'index']);
+    Route::get('/{id}', [VehiclesController::class, 'show']);
     Route::post('/', [VehiclesController::class, 'store']);
     Route::put('/{id}', [VehiclesController::class, 'update']);
 });

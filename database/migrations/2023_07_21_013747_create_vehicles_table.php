@@ -31,7 +31,7 @@ return new class extends Migration
                 ->default(0.00);
 
             $table->text('image')
-                ->nullable(false);
+                ->nullable();
 
             $table->timestamps();
         });
