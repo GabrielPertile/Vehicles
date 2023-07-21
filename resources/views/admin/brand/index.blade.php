@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @include('admin.brand.components.brand-modal')
+@include('admin.brand.components.update-brand-modal')
 
 @section('content')
     <div class="container">
@@ -8,15 +9,16 @@
             <div class="col-md-12">
                 <h1>Marcas</h1>
                 {{-- <button class="btn btn-primary mb-3" onclick="openCreateDialog()">Add Brand</button> --}}
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#brandModal">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" id="brandModal"
+                    data-bs-target="#brandModal">
                     Nova marca
-                  </button>
+                </button>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th class='col-lg-1'>Id</th>
                             <th>Nome</th>
-                            <th>Ações</th>
+                            <th class='col-lg-2 float-right'>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,11 +26,11 @@
                             <tr>
                                 <td>{{ $brand->id }}</td>
                                 <td>{{ $brand->name }}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary"
-                                        >Editar</button>
-                                    <button class="btn btn-sm btn-danger"
-                                        >Remover</button>
+                                <td class="float-right">
+                                    <button class="btn btn-sm btn-primary" id="updateBrandModalBtn"
+                                        data-bs-target="#updateBrandModal"
+                                        onclick="openEditDialog({{ $brand->id }})">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Remover</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -39,8 +41,28 @@
         </div>
     </div>
     <script>
-        let brands = @json($brands);
+        function openEditDialog(brandId) {
+            console.log(brandId);
+            // Fetch the brand data using the show route
+            $.ajax({
+                type: 'GET',
+                url: `api/brands/${brandId}`,
 
-        // The rest of the JavaScript remains the same...
+                dataType: 'json',
+                success: function(response) {
+                    const responseData = response.data;
+
+                    console.log(responseData);
+
+                    $('#updateBrandModal').modal('show');
+                    // $('#updateBrandForm').attr('action', '/brands/' + responseData.id);
+                    $('#name').val(responseData.name);
+                    $('#brandId').val(responseData.id);
+                },
+                error: function(xhr) {
+                    alert('Error fetching brand data.');
+                }
+            });
+        }
     </script>
 @endsection

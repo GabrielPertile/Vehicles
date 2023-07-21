@@ -21,13 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::prefix('brands')->group(function () {
+Route::prefix('brands')->group(function () {
 
-//     Route::get('/', [BrandsController::class, 'index'])->name('brands.index');
-//     Route::get('/{id}', [BrandsController::class, 'show'])->name('brands.show');
-//     Route::post('/', [BrandsController::class, 'store'])->name('brands.store');
-//     Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
-// });
+    Route::get('/', [BrandsController::class, 'index'])->name('brands.index');
+    Route::get('/{id}', [BrandsController::class, 'show'])->name('brands.show');
+    Route::post('/', [BrandsController::class, 'store'])->name('brands.store');
+    Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
+});
 
 Route::prefix('models')->group(function () {
 

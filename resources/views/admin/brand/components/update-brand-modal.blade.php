@@ -1,12 +1,12 @@
-{{-- Modal de cadastro --}}
-<div class="modal" tabindex="-1" id="brandModal" style="@error('name') display:block @enderror">
+{{-- Modal de Update --}}
+<div class="modal" tabindex="-1" id="updateBrandModal" style="@error('name') display:block @enderror">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="brandModalLabel">Nova marca</h5>
+                <h5 class="modal-title" id="updateBrandModalLabel">Editar marca</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="brandForm" method="post" action="{{ route('brands.store') }}">
+            <form id="updateBrandModal" method="PUT" action="{{ route('brands.store') }}">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

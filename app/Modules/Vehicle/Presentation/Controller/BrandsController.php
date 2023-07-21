@@ -4,17 +4,19 @@ namespace App\Modules\Vehicle\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Vehicle\Data\Dao\BrandDao;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandRequest;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandUseCase;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\ShowBrand\ShowBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandResource;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandRequest;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandUseCase;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\ShowBrand\ShowBrandResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandResource;
+use Illuminate\Support\Facades\Redirect;
 
 class BrandsController extends Controller
 {
@@ -30,9 +32,6 @@ class BrandsController extends Controller
     public function index(IndexBrandUseCase $useCase, IndexBrandRequest $request)
     {
         $brands = IndexBrandResource::collection($useCase->execute($request));
-        // dd(array_values($brands->toArray($request)));
-        // $brands = $brands->toArray($request);
-        // dd(compact('brands'));
         return view(
             'admin.brand.index',
             compact('brands')
@@ -60,9 +59,10 @@ class BrandsController extends Controller
      * @param CreateBrandRequest $request
      * @return JsonResource
      */
-    public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request): JsonResource
+    public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request)
     {
         // return redirect()->to(route('/brands'));
+        return back()->with(CreateBrandResource::make($useCase->execute($request))->toArray($request));
         return CreateBrandResource::make($useCase->execute($request));
     }
 
@@ -77,6 +77,7 @@ class BrandsController extends Controller
      */
     public function update(UpdateBrandUseCase $useCase, UpdateBrandRequest $request, int $id): JsonResource
     {
-        return CreateBrandResource::make($useCase->execute($request, $id));
+        // return back()->with(UpdateBrandResource::make($useCase->execute($request, $id))->toArray($request));
+        return UpdateBrandResource::make($useCase->execute($request, $id));
     }
 }
