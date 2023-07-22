@@ -3,9 +3,8 @@
 namespace App\Modules\Vehicle\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandByVehiclesResource;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandUseCase;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle\ShowVehicleRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle\ShowVehicleUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle\ShowVehicleResource;
@@ -14,9 +13,13 @@ use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\IndexVehicle\IndexVehicl
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\IndexVehicle\IndexVehicleResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\CreateVehicle\CreateVehicleRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\CreateVehicle\CreateVehicleUseCase;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\DeleteVehicle\DeleteVehicleRequest;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\DeleteVehicle\DeleteVehicleUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\UpdateVehicle\UpdateVehicleRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\UpdateVehicle\UpdateVehicleUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\CreateVehicle\CreateVehicleResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\DeleteVehicle\DeleteVehicleResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandByVehiclesResource;
 
 class VehiclesController extends Controller
 {
@@ -80,5 +83,10 @@ class VehiclesController extends Controller
             ->route('vehicles.index')
             ->with(CreateVehicleResource::make($useCase->execute($request, $id))->toArray($request))
             ->withInput(['id' => $id]);
+    }
+
+    public function destroy(DeleteVehicleUseCase $useCase, DeleteVehicleRequest $request, int $id)
+    {
+        return redirect()->route('vehicles.index')->with(DeleteVehicleResource::make($useCase->execute($id))->toArray($request));
     }
 }

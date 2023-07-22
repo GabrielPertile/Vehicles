@@ -45,4 +45,5 @@ Route::prefix('vehicles')->group(function () {
     Route::get('/{id}', [VehiclesController::class, 'show'])->name('vehicles.show');
     Route::post('/', [VehiclesController::class, 'store'])->name('vehicles.store');
     Route::put('/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');
+    Route::delete('/{id}', [VehiclesController::class, 'destroy'])->name('vehicles.destroy');
 });

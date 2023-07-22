@@ -30,5 +30,8 @@ return [
         'update' => [
             'success' => 'Veículo atualizado com sucesso.'
         ],
+        'destroy' => [
+            'success' => 'Veículo removido com sucesso.'
+        ],
     ],
 ];

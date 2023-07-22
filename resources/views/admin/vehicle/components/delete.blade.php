@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form action="{{ route('models.destroy', $vehicle->id) }}" method="POST">
+                <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit" id="formSubmit">Salvar</button>
