@@ -64,7 +64,7 @@ class BrandsController extends Controller
     public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request)
     {
         // return redirect()->to(route('/brands'));
-        return back()->with(CreateBrandResource::make($useCase->execute($request))->toArray($request));
+        return redirect()->route('brands.index')->with(CreateBrandResource::make($useCase->execute($request))->toArray($request));
         // return CreateBrandResource::make($useCase->execute($request));
     }
 

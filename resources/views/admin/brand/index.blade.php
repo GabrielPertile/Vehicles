@@ -29,10 +29,16 @@
                                 <td>#{{ $brand->id }}</td>
                                 <td>{{ $brand->name }}</td>
                                 <td class="float-right">
-                                    <button class="btn btn-sm btn-primary" id="updateBrandModal"
-                                        data-bs-target="#updateBrandModal" data-id="{{ $brand->id }}"
-                                        value="{{ $brand->id }}">Editar</button>
-                                    <button href="#delete" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    {{-- <button class="btn btn-sm btn-primary" id="updateBrandModal"
+                                        data-bs-target="#updateBrandModal" data-bs-toggle="modal"
+                                        data-id="{{ $brand->id }}">Editar</button> --}}
+                                    @include('admin.brand.components.update-modal')
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                        id="updateModal" data-bs-target="#updateModal">
+                                        Editar
+                                    </button>
+                                    @include('admin.brand.components.update-modal')
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete-{{ $brand->id }}">Remover</button>
                                     @include('admin.brand.components.delete')
                                 </td>
@@ -49,84 +55,6 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            var brandId; // To store the brand ID when editing
 
-            // Handle edit button click (Open the modal in edit mode)
-            $(document).on('click', '#updateBrandModal', function() {
-                var brandId = $(this).val();
-                // alert(brandId)
-                // Fetch the brand data using the show route
-                $.ajax({
-                    type: 'GET',
-                    url: `/brands/${brandId}`,
-
-                    dataType: 'json',
-                    success: function(response) {
-                        const responseData = response.data;
-                        $('#brandId').val(responseData.id);
-                        console.log(responseData);
-
-                        brandId = responseData.id;
-                        let updateUrl = '{{ route('brands.update', ':id') }}';
-                        updateUrl = updateUrl.replace(':id', brandId);
-
-                        $('#name').val(responseData.name);
-                        $('#brandForm').attr('action', updateUrl).attr('method', 'PUT');
-                        $('#brandModal').modal('show');
-                        $('#brandId').val(responseData.id);
-                    },
-                    error: function(xhr) {
-                        alert('Error fetching brand data.');
-                    }
-                });
-            });
-
-            // Handle add new brand button click (Open the modal in create mode)
-            $(document).on('click', '#newBrandModal', function() {
-                var brandId = null;
-                let createUrl = '{{ route('brands.store') }}';
-
-                $('#name').val('');
-                $('#brandForm').attr('action', createUrl).attr('method', 'POST');
-                $('#brandModal').modal('show');
-            });
-        });
-        // // Aqui seta valor
-        // function openmodal() {
-
-        //     brandId = null;
-        //     let createUrl = '{{ route('brands.store') }}';
-        //     $('#brandModal').modal('show');
-        //     $('#brandForm').attr('action', createUrl).attr('method', 'POST');
-
-        //     $('#name').val(null);
-        // }
-
-        // function openEditDialog(brandId) {
-        //     // Fetch the brand data using the show route
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: `/brands/${brandId}`,
-
-        //         dataType: 'json',
-        //         success: function(response) {
-        //             const responseData = response.data;
-
-        //             console.log(brandId);
-        //             console.log(responseData);
-        //             brandId = $(this).data('id');
-        //             console.log(brandId);
-        //             $('#brandModal').modal('show');
-        //             $('#brandForm').attr('action', '/brands/' + responseData.id);
-        //             $('#brandForm').attr('method', 'PUT');
-        //             $('#upname').val(responseData.name);
-        //             $('#brandId').val(responseData.id);
-        //         },
-        //         error: function(xhr) {
-        //             alert('Error fetching brand data.');
-        //         }
-        //     });
-        // }
     </script>
 @endsection

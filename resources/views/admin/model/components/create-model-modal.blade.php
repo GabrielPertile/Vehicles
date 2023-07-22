@@ -1,5 +1,5 @@
 {{-- Modal de cadastro --}}
-<div class="modal" tabindex="-1" id="modelModal" style="@error('name') display:block @enderror">
+<div class="modal" tabindex="-1" id="modelModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,11 +11,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label>Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required
-                            class="@error('name') is-invalid @enderror">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <input type="text" class="form-control validate" id="name" name="name" required>
                     </div>
                 </div>
                 <div class="modal-footer">

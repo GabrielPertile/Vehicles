@@ -1,5 +1,12 @@
 {{-- Modal de cadastro --}}
-<div class="modal" tabindex="-1" id="brandModal" style="@error('name') display:block @enderror">
+<div class="modal" tabindex="-1" id="brandModal">
+    @if (count($errors) > 0)
+        <script>
+            $(document).ready(function() {
+                $('#brandModal').modal('show');
+            });
+        </script>
+    @endif
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,12 +15,11 @@
             </div>
             <form id="brandForm" method="POST" action="{{ route('brands.store') }}">
                 @csrf
-                {{-- <input type="text" name="brandId" id="brandId"> --}}
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label>Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
-                            class="@error('name') is-invalid @enderror">
+                            class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
