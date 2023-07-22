@@ -63,9 +63,7 @@ class BrandsController extends Controller
      */
     public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request)
     {
-        // return redirect()->to(route('/brands'));
         return redirect()->route('brands.index')->with(CreateBrandResource::make($useCase->execute($request))->toArray($request));
-        // return CreateBrandResource::make($useCase->execute($request));
     }
 
     /**
@@ -79,7 +77,7 @@ class BrandsController extends Controller
      */
     public function update(UpdateBrandUseCase $useCase, UpdateBrandRequest $request, int $id)/*  */
     {
-        return back()->with(UpdateBrandResource::make($useCase->execute($request, $id))->toArray($request));
+        return back()->with(UpdateBrandResource::make($useCase->execute($request, $id))->toArray($request))->withInput(['id' => $id]);
         // return CreateBrandResource::make($useCase->execute($request, $id));
     }
 

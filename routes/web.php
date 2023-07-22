@@ -36,5 +36,6 @@ Route::prefix('models')->group(function () {
     Route::get('/{id}', [ModelsController::class, 'show'])->name('models.show');
     Route::post('/', [ModelsController::class, 'store'])->name('models.store');
     Route::put('/{id}', [ModelsController::class, 'update'])->name('models.update');
+    Route::delete('/{id}', [ModelsController::class, 'destroy'])->name('models.destroy');
 });
 

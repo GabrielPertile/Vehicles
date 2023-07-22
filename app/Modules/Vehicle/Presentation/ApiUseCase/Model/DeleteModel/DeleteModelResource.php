@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel;
+namespace App\Modules\Vehicle\Presentation\ApiUseCase\Model\DeleteModel;
 
 use App\Libraries\Translator;
-use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndexModelResource extends JsonResource
+class DeleteModelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +16,9 @@ class IndexModelResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $translator = new Translator();
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'brand' => IndexBrandResource::make($this->brand)
+            'message' => $translator->translate('app.vehicle.api_use_case.model.destroy.success'),
         ];
     }
 }

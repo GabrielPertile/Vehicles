@@ -6,14 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\ShowModel\ShowModelUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\ShowModel\ShowModelResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelUseCase;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\IndexModel\IndexModelResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelUseCase;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\DeleteModel\DeleteModelRequest;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\DeleteModel\DeleteModelUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\CreateModel\CreateModelResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Model\DeleteModel\DeleteModelResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Model\UpdateModel\UpdateModelResource;
 
 class ModelsController extends Controller
@@ -26,14 +31,14 @@ class ModelsController extends Controller
      * @param IndexModelUseCase $useCase
      * @param IndexModelRequest $request
      */
-    public function index(IndexModelUseCase $useCase, IndexModelRequest $request)
+    public function index(IndexModelUseCase $useCase, IndexModelRequest $request, IndexBrandUseCase $brandUseCase)
     {
         $models = IndexModelResource::collection($useCase->execute($request));
+        $brands = IndexBrandResource::collection($brandUseCase->execute($request));
         return view(
             'admin.model.index',
-            compact('models')
+            compact('models', 'brands')
         );
-        // return IndexModelResource::collection($useCase->execute($request));
     }
 
     /**
@@ -55,11 +60,10 @@ class ModelsController extends Controller
      * @title Cadatrar modelo de carro
      * @param CreateModelUseCase $useCase
      * @param CreateModelRequest $request
-     * @return JsonResource
      */
-    public function store(CreateModelUseCase $useCase, CreateModelRequest $request): JsonResource
+    public function store(CreateModelUseCase $useCase, CreateModelRequest $request)
     {
-        return CreateModelResource::make($useCase->execute($request));
+        return redirect()->route('models.index')->with(CreateModelResource::make($useCase->execute($request))->toArray($request));
     }
 
     /**
@@ -68,10 +72,17 @@ class ModelsController extends Controller
      * @title Atualziar modelo de carro
      * @param UpdateModelUseCase $useCase
      * @param UpdateModelRequest $request
-     * @return JsonResource
      */
-    public function update(UpdateModelUseCase $useCase, UpdateModelRequest $request, int $id): JsonResource
+    public function update(UpdateModelUseCase $useCase, UpdateModelRequest $request, int $id)
     {
-        return UpdateModelResource::make($useCase->execute($request, $id));
+        return redirect()
+            ->route('models.index')
+            ->with(UpdateModelResource::make($useCase->execute($request, $id))->toArray($request))
+            ->withInput(['id' => $id]);
+    }
+
+    public function destroy(DeleteModelUseCase $useCase, DeleteModelRequest $request, int $id)
+    {
+        return redirect()->route('models.index')->with(DeleteModelResource::make($useCase->execute($id))->toArray($request));
     }
 }

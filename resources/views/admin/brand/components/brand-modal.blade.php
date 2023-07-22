@@ -1,11 +1,6 @@
 {{-- Modal de cadastro --}}
 <div class="modal" tabindex="-1" id="brandModal">
     @if (count($errors) > 0)
-        <script>
-            $(document).ready(function() {
-                $('#brandModal').modal('show');
-            });
-        </script>
     @endif
     <div class="modal-dialog">
         <div class="modal-content">

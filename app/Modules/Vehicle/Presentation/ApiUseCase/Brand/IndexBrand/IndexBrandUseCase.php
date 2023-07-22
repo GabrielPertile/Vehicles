@@ -3,10 +3,11 @@
 namespace App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand;
 
 use App\Modules\Vehicle\Data\Dao\BrandDao;
+use Illuminate\Foundation\Http\FormRequest;
 
 class IndexBrandUseCase
 {
-    public function execute(IndexBrandRequest $request)
+    public function execute(FormRequest $request)
     {
         $query = BrandDao::all();
 

@@ -29,12 +29,9 @@
                                 <td>#{{ $brand->id }}</td>
                                 <td>{{ $brand->name }}</td>
                                 <td class="float-right">
-                                    {{-- <button class="btn btn-sm btn-primary" id="updateBrandModal"
-                                        data-bs-target="#updateBrandModal" data-bs-toggle="modal"
-                                        data-id="{{ $brand->id }}">Editar</button> --}}
                                     @include('admin.brand.components.update-modal')
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                        id="updateModal" data-bs-target="#updateModal">
+                                        id="updateModal-{{$brand->id}}" data-bs-target="#updateModal-{{$brand->id}}">
                                         Editar
                                     </button>
                                     @include('admin.brand.components.update-modal')
