@@ -25,11 +25,15 @@ class ModelsController extends Controller
      * @title Listar modelos de carro
      * @param IndexModelUseCase $useCase
      * @param IndexModelRequest $request
-     * @return JsonResource
      */
-    public function index(IndexModelUseCase $useCase, IndexModelRequest $request): JsonResource
+    public function index(IndexModelUseCase $useCase, IndexModelRequest $request)
     {
-        return IndexModelResource::collection($useCase->execute($request));
+        $models = IndexModelResource::collection($useCase->execute($request));
+        return view(
+            'admin.model.index',
+            compact('models')
+        );
+        // return IndexModelResource::collection($useCase->execute($request));
     }
 
     /**

@@ -29,13 +29,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
 // });
 
-Route::prefix('models')->group(function () {
+// Route::prefix('models')->group(function () {
 
-    Route::get('/', [ModelsController::class, 'index'])->name('models.index');
-    Route::get('/{id}', [ModelsController::class, 'show'])->name('models.show');
-    Route::post('/', [ModelsController::class, 'store'])->name('models.store');
-    Route::put('/{id}', [ModelsController::class, 'update'])->name('models.update');
-});
+//     Route::get('/', [ModelsController::class, 'index'])->name('models.index');
+//     Route::get('/{id}', [ModelsController::class, 'show'])->name('models.show');
+//     Route::post('/', [ModelsController::class, 'store'])->name('models.store');
+//     Route::put('/{id}', [ModelsController::class, 'update'])->name('models.update');
+// });
 
 Route::prefix('vehicles')->group(function () {
 

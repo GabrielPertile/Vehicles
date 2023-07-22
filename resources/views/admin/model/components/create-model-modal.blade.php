@@ -1,14 +1,13 @@
 {{-- Modal de cadastro --}}
-<div class="modal" tabindex="-1" id="brandModal" style="@error('name') display:block @enderror">
+<div class="modal" tabindex="-1" id="modelModal" style="@error('name') display:block @enderror">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="brandModalLabel">Nova marca</h5>
+                <h5 class="modal-title" id="modelModalLabel">Novo modelo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="brandForm" method="POST" action="{{ route('brands.store') }}">
+            <form id="modelForm" method="POST" action="{{ route('models.store') }}">
                 @csrf
-                {{-- <input type="text" name="brandId" id="brandId"> --}}
                 <div class="modal-body">
                     <div class="mb-3">
                         <label>Name</label>

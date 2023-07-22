@@ -1,40 +1,39 @@
 @extends('layouts.app')
 
-{{-- @include('admin.brand.components.update-brand-modal') --}}
-
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Marcas</h1>
+                <h1>Modelo</h1>
                 {{-- <button class="btn btn-primary mb-3" onclick="openCreateDialog()">Add Brand</button> --}}
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" id="newBrandModal"
-                    data-bs-target="#brandModal">
-                    Nova marca
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" id="newModelModal"
+                    data-bs-target="#modelModal">
+                    Novo modelo
                 </button>
 
-                @include('admin.brand.components.brand-modal')
+                @include('admin.model.components.create-model-modal')
                 @include('admin.includes.messages')
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th class='col-lg-1'>ID</th>
                             <th>Nome</th>
+                            <th>Marca</th>
                             <th class='col-lg-2 float-right'>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($brands as $brand)
+                        @forelse ($models as $model)
                             <tr>
-                                <td>#{{ $brand->id }}</td>
-                                <td>{{ $brand->name }}</td>
+                                <td>#{{ $model->id }}</td>
+                                <td>{{ $model->name }}</td>
+                                <td>{{ $model->brand->name }}</td>
                                 <td class="float-right">
-                                    <button class="btn btn-sm btn-primary" id="updateBrandModal"
-                                        data-bs-target="#updateBrandModal" data-id="{{ $brand->id }}"
-                                        value="{{ $brand->id }}">Editar</button>
+                                    <button class="btn btn-sm btn-primary" id="modelModal" data-bs-target="#modelModal"
+                                        data-id="{{ $model->id }}" value="{{ $model->id }}">Editar</button>
                                     <button href="#delete" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete-{{ $brand->id }}">Remover</button>
-                                    @include('admin.brand.components.delete')
+                                        data-bs-target="#delete-{{ $model->id }}">Remover</button>
+                                    @include('admin.model.components.delete')
                                 </td>
                             </tr>
                         @empty
@@ -53,13 +52,13 @@
             var brandId; // To store the brand ID when editing
 
             // Handle edit button click (Open the modal in edit mode)
-            $(document).on('click', '#updateBrandModal', function() {
+            $(document).on('click', '#modelModal', function() {
                 var brandId = $(this).val();
                 // alert(brandId)
                 // Fetch the brand data using the show route
                 $.ajax({
                     type: 'GET',
-                    url: `/brands/${brandId}`,
+                    url: `/models/${brandId}`,
 
                     dataType: 'json',
                     success: function(response) {

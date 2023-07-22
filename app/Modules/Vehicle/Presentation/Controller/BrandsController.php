@@ -14,6 +14,9 @@ use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandUse
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\CreateBrand\CreateBrandResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\DeleteBrand\DeleteBrandRequest;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\DeleteBrand\DeleteBrandResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\DeleteBrand\DeleteBrandUseCase;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\ShowBrand\ShowBrandResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\UpdateBrand\UpdateBrandResource;
 use Illuminate\Support\Facades\Redirect;
@@ -27,14 +30,10 @@ class BrandsController extends Controller
      * @title listar marcas
      * @param IndexBrandUseCase $useCase
      * @param IndexBrandRequest $request
-     * @return JsonResource
      */
     public function index(IndexBrandUseCase $useCase, IndexBrandRequest $request)
     {
         $brands = IndexBrandResource::collection($useCase->execute($request));
-        // dd(array_values($brands->toArray($request)));
-        // $brands = $brands->toArray($request);
-        // dd(compact('brands'));
         return view(
             'admin.brand.index',
             compact('brands')
@@ -82,5 +81,10 @@ class BrandsController extends Controller
     {
         return back()->with(UpdateBrandResource::make($useCase->execute($request, $id))->toArray($request));
         // return CreateBrandResource::make($useCase->execute($request, $id));
+    }
+
+    public function destroy(DeleteBrandUseCase $useCase, DeleteBrandRequest $request, int $id)
+    {
+        return redirect()->route('brands.index')->with(DeleteBrandResource::make($useCase->execute($id))->toArray($request));
     }
 }

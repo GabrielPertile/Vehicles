@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Vehicle\Presentation\Controller\BrandsController;
+use App\Modules\Vehicle\Presentation\Controller\ModelsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +27,14 @@ Route::prefix('brands')->group(function () {
     Route::get('/{id}', [BrandsController::class, 'show'])->name('brands.show');
     Route::post('/', [BrandsController::class, 'store'])->name('brands.store');
     Route::put('/{id}', [BrandsController::class, 'update'])->name('brands.update');
+    Route::delete('/{id}', [BrandsController::class, 'destroy'])->name('brands.destroy');
+});
+
+Route::prefix('models')->group(function () {
+
+    Route::get('/', [ModelsController::class, 'index'])->name('models.index');
+    Route::get('/{id}', [ModelsController::class, 'show'])->name('models.show');
+    Route::post('/', [ModelsController::class, 'store'])->name('models.store');
+    Route::put('/{id}', [ModelsController::class, 'update'])->name('models.update');
 });
 

@@ -8,6 +8,9 @@ return [
         'update' => [
             'success' => 'Marca atualizada com sucesso.'
         ],
+        'destroy' => [
+            'success' => 'Marca removida com sucesso.'
+        ],
     ],
     'model' => [
         'store' => [
@@ -15,6 +18,9 @@ return [
         ],
         'update' => [
             'success' => 'Modelo atualizado com sucesso.'
+        ],
+        'destroy' => [
+            'success' => 'Modelo removido com sucesso.'
         ],
     ],
     'vehicle' => [
