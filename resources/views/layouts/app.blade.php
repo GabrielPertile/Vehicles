@@ -15,11 +15,6 @@
         /* Add your custom CSS styles here */
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>1 --}}
 </head>
 
 <body>
@@ -39,7 +34,7 @@
                         <a class="nav-link" href="/models">Modelos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/brands">Veículos</a>
+                        <a class="nav-link" href="/vehicles">Veículos</a>
                     </li>
                 </ul>
             </div>

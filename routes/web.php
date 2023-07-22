@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Modules\Vehicle\Presentation\Controller\BrandsController;
 use App\Modules\Vehicle\Presentation\Controller\ModelsController;
-use Illuminate\Support\Facades\Route;
+use App\Modules\Vehicle\Presentation\Controller\VehiclesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,9 @@ Route::prefix('models')->group(function () {
     Route::delete('/{id}', [ModelsController::class, 'destroy'])->name('models.destroy');
 });
 
+Route::prefix('vehicles')->group(function () {
+    Route::get('/', [VehiclesController::class, 'index'])->name('vehicles.index');
+    Route::get('/{id}', [VehiclesController::class, 'show'])->name('vehicles.show');
+    Route::post('/', [VehiclesController::class, 'store'])->name('vehicles.store');
+    Route::put('/{id}', [VehiclesController::class, 'update'])->name('vehicles.update');
+});

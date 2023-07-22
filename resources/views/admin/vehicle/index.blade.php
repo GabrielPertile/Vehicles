@@ -4,38 +4,43 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Modelos</h1>
+                <h1>Veículos</h1>
                 <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" id="newModelModal"
                     data-bs-target="#modelModal">
-                    Novo modelo
+                    Novo Veículo
                 </button>
 
-                @include('admin.model.components.create-modal')
+                @include('admin.vehicle.components.create-modal')
                 @include('admin.includes.messages')
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th class='col-lg-1'>ID</th>
-                            <th>Nome</th>
+                            <th>Descrição</th>
                             <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Preço (R$)</th>
                             <th class='col-lg-2 float-right'>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($models as $model)
+                        @forelse ($vehicles as $vehicle)
                             <tr>
-                                <td>#{{ $model->id }}</td>
-                                <td>{{ $model->name }}</td>
-                                <td>{{ $model->brand->name }}</td>
+                                <td>#{{ $vehicle->id }}</td>
+                                <td>{{ $vehicle->description }}</td>
+                                <td>{{ $vehicle->brand?->name }}</td>
+                                <td>{{ $vehicle->model?->name }}</td>
+                                <td>{{ $vehicle->price }}</td>
                                 <td class="float-right">
-                                    @include('admin.model.components.update-modal')
+                                    @include('admin.vehicle.components.update-modal')
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                        id="updateModal-{{$model->id}}" data-bs-target="#updateModal-{{$model->id}}">
+                                        id="updateModal-{{ $vehicle->id }}"
+                                        data-bs-target="#updateModal-{{ $vehicle->id }}">
                                         Editar
                                     </button>
                                     <button href="#delete" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete-{{ $model->id }}">Remover</button>
-                                    @include('admin.model.components.delete')
+                                        data-bs-target="#delete-{{ $vehicle->id }}">Remover</button>
+                                    @include('admin.vehicle.components.delete')
                                 </td>
                             </tr>
                         @empty
@@ -49,6 +54,5 @@
             </div>
         </div>
     </div>
-    <script>
-    </script>
+    <script></script>
 @endsection

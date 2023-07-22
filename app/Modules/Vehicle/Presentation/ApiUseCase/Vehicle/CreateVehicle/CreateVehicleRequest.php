@@ -20,7 +20,7 @@ class CreateVehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'nullable|max:1000',
+            'description' => 'required|max:1000',
             'brand_id' => 'required|exists:brands,id',
             'model_id' => [
                 'required',
@@ -28,7 +28,7 @@ class CreateVehicleRequest extends FormRequest
                     ->where('brand_id', $this->brand_id)
             ],
             'price' => 'required|numeric|gt:0',
-            'image' => 'nullable',
+            'image' => 'sometimes|nullable',
         ];
     }
 }

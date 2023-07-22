@@ -3,6 +3,8 @@
 namespace App\Modules\Vehicle\Presentation\Controller;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandByVehiclesResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandUseCase;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle\ShowVehicleRequest;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\ShowVehicle\ShowVehicleUseCase;
@@ -25,11 +27,16 @@ class VehiclesController extends Controller
      * @title Listar carros
      * @param CreateVehicleUseCase $useCase
      * @param CreateVehicleRequest $request
-     * @return JsonResource
      */
-    public function index(IndexVehicleUseCase $useCase, IndexVehicleRequest $request): JsonResource
+    public function index(IndexVehicleUseCase $useCase, IndexVehicleRequest $request,  IndexBrandUseCase $brandUseCase)
     {
-        return IndexVehicleResource::collection($useCase->execute($request));
+        $vehicles = IndexVehicleResource::collection($useCase->execute($request));
+        $brands = IndexBrandByVehiclesResource::collection($brandUseCase->execute($request));
+
+        return view(
+            'admin.vehicle.index',
+            compact('vehicles', 'brands')
+        );
     }
 
     /**
@@ -40,7 +47,7 @@ class VehiclesController extends Controller
      * @param int $id
      * @return JsonResource
      */
-    public function show(ShowVehicleUseCase $useCase, int $id): JsonResource
+    public function show(ShowVehicleUseCase $useCase, int $id)
     {
         return ShowVehicleResource::make($useCase->execute($id));
     }
@@ -51,11 +58,12 @@ class VehiclesController extends Controller
      * @title Cadatrar carro
      * @param CreateVehicleUseCase $useCase
      * @param CreateVehicleRequest $request
-     * @return JsonResource
      */
-    public function store(CreateVehicleUseCase $useCase, CreateVehicleRequest $request): JsonResource
+    public function store(CreateVehicleUseCase $useCase, CreateVehicleRequest $request)
     {
-        return CreateVehicleResource::make($useCase->execute($request));
+        return redirect()
+            ->route('vehicles.index')
+            ->with(CreateVehicleResource::make($useCase->execute($request))->toArray($request));
     }
 
     /**
@@ -65,10 +73,12 @@ class VehiclesController extends Controller
      * @param UpdateVehicleUseCase $useCase
      * @param UpdateVehicleRequest $request
      * @param int $id
-     * @return JsonResource
      */
-    public function update(UpdateVehicleUseCase $useCase, UpdateVehicleRequest $request, int $id): JsonResource
+    public function update(UpdateVehicleUseCase $useCase, UpdateVehicleRequest $request, int $id)
     {
-        return CreateVehicleResource::make($useCase->execute($request, $id));
+        return redirect()
+            ->route('vehicles.index')
+            ->with(CreateVehicleResource::make($useCase->execute($request, $id))->toArray($request))
+            ->withInput(['id' => $id]);
     }
 }

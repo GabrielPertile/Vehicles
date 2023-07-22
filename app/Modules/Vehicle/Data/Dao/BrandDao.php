@@ -7,6 +7,7 @@ use App\Modules\Vehicle\Data\Dao\ModelDao;
 use App\Modules\Vehicle\Data\Dao\VehicleDao;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class BrandDao extends Model
 {
