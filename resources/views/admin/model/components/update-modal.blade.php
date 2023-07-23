@@ -1,13 +1,13 @@
-{{-- Modal de edição --}}
+{{-- Modal de edição de modelo --}}
 <div class="modal" tabindex="-1" id="updateModal-{{ $model->id }}">
     @if (count($errors) > 0 && old('id') == $model->id)
-        {{-- <script>
+        <script>
             $(document).ready(function() {
                 var modelId = {{ $model->id }};
 
                 $("#updateModal-" + modelId).modal('show');
             });
-        </script> --}}
+        </script>
     @endif
     <div class="modal-dialog">
         <div class="modal-content">
@@ -53,3 +53,18 @@
         </div>
     </div>
 </div>
+
+<script>
+      // Para abrir e já carregar marca
+      document.addEventListener("DOMContentLoaded", function() {
+        var myModal = document.getElementById("updateModal-{{ $model->id }}");
+
+        myModal.addEventListener("shown.bs.modal", function() {
+            let model = @json($model);
+            let outerElement = document.getElementById("updateModal-{{ $model->id }}")
+            let innerElement = outerElement.querySelector('#brand_id')
+            innerElement.value = model.brand.id
+            let inputValue = innerElement.value;
+        });
+    });
+</script>

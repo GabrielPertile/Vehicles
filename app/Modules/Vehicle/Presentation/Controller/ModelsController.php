@@ -63,7 +63,7 @@ class ModelsController extends Controller
      */
     public function store(CreateModelUseCase $useCase, CreateModelRequest $request)
     {
-        return redirect()->route('models.index')->with(CreateModelResource::make($useCase->execute($request))->toArray($request));
+        return redirect()->route('models.index')->with(CreateModelResource::make($useCase->execute($request))->toArray($request))->withInput(['id' => null]);
     }
 
     /**
