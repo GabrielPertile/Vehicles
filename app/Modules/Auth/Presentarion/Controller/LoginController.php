@@ -18,7 +18,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('brands');
+            return redirect()->intended(route('brands.index'));
         } else {
             return redirect()->back()->with('erro', 'Usário ou senha inválido');
         }
