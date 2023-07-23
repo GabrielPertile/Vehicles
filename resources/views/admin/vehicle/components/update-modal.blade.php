@@ -47,7 +47,7 @@
                             class="@error('brand_id') is-invalid @enderror">
                             <option value="">Escolha uma marca</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @selected(old('brand_id') ? old('brand_id') == $brand->id : $vehicle->brand->id)>
+                                <option value="{{ $brand->id }}" @selected(old('brand_id') ? old('brand_id') == $brand->id : $vehicle?->brand?->id)>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach
@@ -109,7 +109,7 @@
                             option.selected = true;
                         }
                     @else
-                        {{ $vehicle->model->id }}
+                        {{ $vehicle?->model?->id }}
                     @endif
                     modelSelect.appendChild(option);
                 });
