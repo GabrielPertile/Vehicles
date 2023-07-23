@@ -22,7 +22,8 @@ class IndexVehicleResource extends JsonResource
             'id' => $this->id,
             'description' => $this->description,
             'brand' => IndexBrandResource::make($this->brand),
-            'model' => IndexModelResource::make($this->model)
+            'model' => IndexModelResource::make($this->model),
+            'image' => $this->image
         ];
     }
 }

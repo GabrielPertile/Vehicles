@@ -10,12 +10,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modelModalLabel">Novo veículo</h5>
+                <h5 class="modal-title text-black" id="modelModalLabel">Novo veículo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="modelForm" method="POST" action="{{ route('vehicles.store') }}">
+            <form id="modelForm" method="POST" action="{{ route('vehicles.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="image">Imagem*</label>
+                        <input type="file" class="form-control" required name="image" id="image"
+                            accept="image/png, image/jpeg, image/jpg" value="{{ old('image') }}">
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="mb-3">
                         <label for="description">Descrição*</label>
                         <textarea type="text" class="form-control" id="description" name="description" required

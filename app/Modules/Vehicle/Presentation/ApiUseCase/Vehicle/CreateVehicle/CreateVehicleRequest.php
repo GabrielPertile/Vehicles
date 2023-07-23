@@ -28,7 +28,7 @@ class CreateVehicleRequest extends FormRequest
                     ->where('brand_id', $this->brand_id)
             ],
             'price' => 'required|numeric|gt:0',
-            'image' => 'sometimes|nullable',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120',
         ];
     }
 }

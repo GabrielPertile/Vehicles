@@ -12,14 +12,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Editar veículo</h5>
+                <h5 class="modal-title text-black" id="updateModalLabel">Editar veículo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="modelForm" method="POST" action="{{ route('vehicles.update', $vehicle->id) }}">
+            <form id="modelForm" method="POST" action="{{ route('vehicles.update', $vehicle->id) }}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
                     <input type="hidden" name="id" value="{{ $vehicle->id }}" />
+
+                    <div class="mb-3">
+                        <label for="image">Imagem</label>
+                        <input type="file" class="form-control" @required(!$vehicle->image) name="image"
+                            accept="image/png, image/jpeg, image/jpg">
+                        @if ($vehicle->image)
+                            <img class="mt-3" style="width: 10rem;" src="{{ $vehicle->image }}" />
+                        @endif
+                    </div>
                     <div class="mb-3">
                         <label for="description">Descrição*</label>
                         <textarea class="form-control" id="description" name="description" required
@@ -106,4 +116,45 @@
         });
     }
     document.addEventListener('DOMContentLoaded', setupUpdateModalListeners);
+
+    // Para abrir e já carregar marca
+    document.addEventListener("DOMContentLoaded", function() {
+        var myModal = document.getElementById("updateModal-{{ $vehicle->id }}");
+
+        // Event listener for when the modal is shown
+        myModal.addEventListener("shown.bs.modal", function() {
+            let vehicle = @json($vehicle);
+            console.log('vehicle');
+            console.log(vehicle);
+            let outerElement = document.getElementById("updateModal-{{ $vehicle->id }}")
+            let innerElement = outerElement.querySelector('#brand_id')
+            innerElement.value = vehicle.brand.id
+            let inputValue = innerElement.value;
+            // if (inputValue) {
+
+            //     let selectedBrand = brands.find(brand => brand.id === parseInt(inputValue));
+
+            //     console.log('selectedBrand');
+            //     console.log(selectedBrand);
+            //     let modelSelect = outerElement.querySelector('#model_id');
+            //     modelSelect.innerHTML = '<option value="">Escolha um modelo</option>';
+
+            //     // add select options
+            //     selectedBrand.models.forEach(model => {
+            //         let option = document.createElement('option');
+            //         option.value = model.id;
+            //         option.textContent = model.name;
+
+            //         @if (old('model_id'))
+            //             if ({{ old('model_id') }} === model.id) {
+            //                 option.selected = true;
+            //             }
+            //         @else
+            //             vehicle.model.id
+            //         @endif
+            //         modelSelect.appendChild(option);
+            //     });
+            // }
+        });
+    });
 </script>

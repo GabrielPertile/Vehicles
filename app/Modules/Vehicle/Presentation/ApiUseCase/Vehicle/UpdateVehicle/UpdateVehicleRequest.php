@@ -28,7 +28,7 @@ class UpdateVehicleRequest extends FormRequest
                     ->where('brand_id', $this->brand_id)
             ],
             'price' => 'required|numeric|gt:0',
-            'image' => 'nullable',
+            'image' => 'sometimes|image|mimes:png,jpg,jpeg|max:5120|nullable',
         ];
     }
 }

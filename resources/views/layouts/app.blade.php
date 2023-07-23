@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Vehicles') }}</title>
-
+    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-150x150.png" sizes="32x32">
+    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-300x300.png" sizes="192x192">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,6 +16,7 @@
         /* Add your custom CSS styles here */
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 </head>
 
 <body style="background-image: url(https://autoconf.com.br/wp-content/uploads/2022/01/fundo-planos.png)">
