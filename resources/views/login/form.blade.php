@@ -4,7 +4,7 @@
     <div class="container" style="min-width: 40%; max-width: 30%;">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Login</h5>
+                <div style="text-align: center"><img src="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-150x150.png"></div>
                 <form id="login-form" method="POST" action="{{ route('login.auth') }}">
                     @csrf
                     <div class="modal-body">
