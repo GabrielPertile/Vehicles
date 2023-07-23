@@ -15,12 +15,12 @@
 
                 @include('admin.brand.components.brand-modal')
                 @include('admin.includes.messages')
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped table-dark">
                     <thead>
                         <tr>
                             <th class='col-lg-1'>ID</th>
                             <th>Nome</th>
-                            <th class='col-lg-2 float-right'>Ações</th>
+                            <th class='col-lg-1 col-md-2'>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,12 +31,17 @@
                                 <td class="float-right">
                                     @include('admin.brand.components.update-modal')
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                        id="updateModal-{{$brand->id}}" data-bs-target="#updateModal-{{$brand->id}}">
-                                        Editar
+                                        id="updateModal-{{ $brand->id }}"
+                                        data-bs-target="#updateModal-{{ $brand->id }}">
+                                        <i class="material-icons">
+                                            edit
+                                        </i>
                                     </button>
                                     @include('admin.brand.components.update-modal')
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete-{{ $brand->id }}">Remover</button>
+                                        data-bs-target="#delete-{{ $brand->id }}"><i class="material-icons">
+                                            delete
+                                        </i></button>
                                     @include('admin.brand.components.delete')
                                 </td>
                             </tr>
@@ -51,7 +56,5 @@
             </div>
         </div>
     </div>
-    <script>
-
-    </script>
+    <script></script>
 @endsection

@@ -17,7 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<body style="background-image: url(https://autoconf.com.br/wp-content/uploads/2022/01/fundo-planos.png)">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <div>
