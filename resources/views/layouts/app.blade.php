@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Vehicles') }}</title>
-    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-150x150.png" sizes="32x32">
-    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-300x300.png" sizes="192x192">
+    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-150x150.png"
+        sizes="32x32">
+    <link rel="icon" href="https://autoconf.com.br/wp-content/uploads/2020/12/logo-autoconf-512-300x300.png"
+        sizes="192x192">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,11 +25,20 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <div>
-                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Vehicles') }}</a>
+                <a class="navbar-brand" style="font-size: 30px;"
+                    href="{{ url('/') }}">{{ config('app.name', 'Vehicles') }}</a>
+                @auth
+                    <a class="navbar-item text-white" style="text-decoration: none;"
+                        href="{{ route('brands.index') }}">Marcas</a>
+                    <a class="navbar-item text-white" style="text-decoration: none;"
+                        href="{{ route('models.index') }}">Modelos</a>
+                    <a class="navbar-item text-white" style="text-decoration: none;"
+                        href="{{ route('vehicles.index') }}">Veículos</a>
+                @endauth
             </div>
             @auth
                 <div style="display: flex;">
-                    <div class="dropdown" style="margin-right: 1rem">
+                    {{-- <div class="dropdown" style="margin-right: 1rem">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="navbar-toggler-icon"></span>
@@ -37,7 +48,7 @@
                             <a class="dropdown-item" href="{{ route('models.index') }}">Modelos</a>
                             <a class="dropdown-item" href="{{ route('vehicles.index') }}">Veículos</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAuth"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
