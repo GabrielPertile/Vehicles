@@ -22,8 +22,8 @@
                     <input type="hidden" name="id" value="{{ $vehicle->id }}" />
                     <div class="mb-3">
                         <label for="description">Descrição*</label>
-                        <textarea class="form-control" id="description"
-                            name="description" required class="@error('description') is-invalid @enderror"
+                        <textarea class="form-control" id="description" name="description" required
+                            class="@error('description') is-invalid @enderror"
                             value="{{ old('description') ? old('description') : $vehicle->description }}">
                             {{ old('description') ? old('description') : $vehicle->description }}
                         </textarea>
@@ -77,30 +77,33 @@
     </div>
 </div>
 <script>
-    const outerElement = document.getElementById("updateModal-{{ $vehicle->id }}")
-    let innerElement = outerElement.querySelector('#brand_id')
-    innerElement.addEventListener('change', function() {
-        let brandId = this.value;
-        if (brandId) {
+    function setupUpdateModalListeners() {
+        let outerElement = document.getElementById("updateModal-{{ $vehicle->id }}")
+        let innerElement = outerElement.querySelector('#brand_id')
+        innerElement.addEventListener('change', function() {
+            let brandId = this.value;
+            if (brandId) {
 
-            let selectedBrand = brands.find(brand => brand.id === parseInt(brandId));
+                let selectedBrand = brands.find(brand => brand.id === parseInt(brandId));
 
-            let modelSelect = outerElement.querySelector('#model_id');
-            modelSelect.innerHTML = '<option value="">Escolha um modelo</option>';
-            selectedBrand.models.forEach(model => {
-                let option = document.createElement('option');
-                option.value = model.id;
-                option.textContent = model.name;
+                let modelSelect = outerElement.querySelector('#model_id');
+                modelSelect.innerHTML = '<option value="">Escolha um modelo</option>';
+                selectedBrand.models.forEach(model => {
+                    let option = document.createElement('option');
+                    option.value = model.id;
+                    option.textContent = model.name;
 
-                @if (old('model_id'))
-                    if ({{ old('model_id') }} === model.id) {
-                        option.selected = true;
-                    }
-                @else
-                    {{ $vehicle->model->id }}
-                @endif
-                modelSelect.appendChild(option);
-            });
-        } else {}
-    });
+                    @if (old('model_id'))
+                        if ({{ old('model_id') }} === model.id) {
+                            option.selected = true;
+                        }
+                    @else
+                        {{ $vehicle->model->id }}
+                    @endif
+                    modelSelect.appendChild(option);
+                });
+            } else {}
+        });
+    }
+    document.addEventListener('DOMContentLoaded', setupUpdateModalListeners);
 </script>
