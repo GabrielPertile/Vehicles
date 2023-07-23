@@ -2,10 +2,10 @@
 <div class="modal" tabindex="-1" id="updateModal-{{ $brand->id }}">
     @if (count($errors) > 0 && old('id') == $brand->id)
         <script>
-            var oldData = {!! json_encode(old()) !!};
-            var brand = {!! json_encode($brand) !!};
-            console.log(oldData);
-            console.log(brand);
+            // var oldData = {!! json_encode(old()) !!};
+            // var brand = {!! json_encode($brand) !!};
+            // console.log(oldData);
+            // console.log(brand);
             $(document).ready(function() {
                 var brandId = {{ $brand->id }};
 

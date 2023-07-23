@@ -20,6 +20,7 @@ use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\UpdateVehicle\UpdateVehi
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\CreateVehicle\CreateVehicleResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\DeleteVehicle\DeleteVehicleResource;
 use App\Modules\Vehicle\Presentation\ApiUseCase\Brand\IndexBrand\IndexBrandByVehiclesResource;
+use App\Modules\Vehicle\Presentation\ApiUseCase\Vehicle\UpdateVehicle\UpdateVehicleResource;
 
 class VehiclesController extends Controller
 {
@@ -66,7 +67,7 @@ class VehiclesController extends Controller
     {
         return redirect()
             ->route('vehicles.index')
-            ->with(CreateVehicleResource::make($useCase->execute($request))->toArray($request));
+            ->with(CreateVehicleResource::make($useCase->execute($request))->toArray($request))->withInput(['id' => null]);
     }
 
     /**
@@ -81,7 +82,7 @@ class VehiclesController extends Controller
     {
         return redirect()
             ->route('vehicles.index')
-            ->with(CreateVehicleResource::make($useCase->execute($request, $id))->toArray($request))
+            ->with(UpdateVehicleResource::make($useCase->execute($request, $id))->toArray($request))
             ->withInput(['id' => $id]);
     }
 

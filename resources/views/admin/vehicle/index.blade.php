@@ -15,7 +15,7 @@
                 <table class="table table-bordered table-striped table-dark">
                     <thead>
                         <tr>
-                            <th class='col-lg-1'>ID</th>
+                            <th class='col-lg-3'></th>
                             <th>Descrição</th>
                             <th>Marca</th>
                             <th>Modelo</th>
@@ -26,12 +26,16 @@
                     <tbody>
                         @forelse ($vehicles as $vehicle)
                             <tr>
-                                <td>#{{ $vehicle->id }}</td>
-                                <td>{{ $vehicle->description }}</td>
-                                <td>{{ $vehicle->brand?->name }}</td>
-                                <td>{{ $vehicle->model?->name }}</td>
-                                <td>{{ number_format($vehicle->price, 2, ',', '.') }}</td>
-                                <td class="float-right">
+                                <td class="align-middle text-center">
+                                    <img class="card-img-top" style="width: 10rem !important;"
+                                        @if ($vehicle->image) src="{{ $vehicle->image }}" @else src="https://free-psd-templates.com/wp-content/uploads/2020/03/Screenshot_18-750x500.webp" @endif
+                                        alt="Card image cap">
+                                </td>
+                                <td class="align-middle">{{ $vehicle->description }}</td>
+                                <td class="align-middle">{{ $vehicle->brand?->name }}</td>
+                                <td class="align-middle">{{ $vehicle->model?->name }}</td>
+                                <td class="align-middle text-end">{{ number_format($vehicle->price, 2, ',', '.') }}</td>
+                                <td class="align-middle">
                                     @include('admin.vehicle.components.update-modal')
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                         id="updateModal-{{ $vehicle->id }}"

@@ -1,6 +1,6 @@
 {{-- Modal de cadastro --}}
 <div class="modal" tabindex="-1" id="modelModal">
-    @if (count($errors) > 0)
+    @if (count($errors) > 0 && old('id') == 'null')
         <script>
             $(document).ready(function() {
                 $('#modelModal').modal('show');
@@ -16,6 +16,7 @@
             <form id="modelForm" method="POST" action="{{ route('vehicles.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
+                    <input type="hidden" name="id" value="null" />
                     <div class="mb-3">
                         <label for="image">Imagem*</label>
                         <input type="file" class="form-control" required name="image" id="image"

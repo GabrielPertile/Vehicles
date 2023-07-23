@@ -87,6 +87,7 @@
     </div>
 </div>
 <script>
+    // Adiciona eventos de change no campo marca para atualizar modelos
     function setupUpdateModalListeners() {
         let outerElement = document.getElementById("updateModal-{{ $vehicle->id }}")
         let innerElement = outerElement.querySelector('#brand_id')
@@ -115,46 +116,42 @@
             } else {}
         });
     }
-    document.addEventListener('DOMContentLoaded', setupUpdateModalListeners);
 
-    // Para abrir e já carregar marca
-    document.addEventListener("DOMContentLoaded", function() {
+    // Para abrir e já carregar marca e modelo
+    function loadBrandAndModelFieldOnShow() {
         var myModal = document.getElementById("updateModal-{{ $vehicle->id }}");
 
-        // Event listener for when the modal is shown
         myModal.addEventListener("shown.bs.modal", function() {
             let vehicle = @json($vehicle);
-            console.log('vehicle');
-            console.log(vehicle);
             let outerElement = document.getElementById("updateModal-{{ $vehicle->id }}")
             let innerElement = outerElement.querySelector('#brand_id')
             innerElement.value = vehicle.brand.id
-            let inputValue = innerElement.value;
-            // if (inputValue) {
+            let brandInputValue = innerElement.value;
+            let selectedBrand = brands.find(brand => brand.id === parseInt(brandInputValue));
+            let modelSelect = outerElement.querySelector('#model_id')
 
-            //     let selectedBrand = brands.find(brand => brand.id === parseInt(inputValue));
+            modelSelect.innerHTML = '<option value="">Escolha um modelo</option>';
+            selectedBrand.models.forEach(model => {
+                console.log(model);
+                let option = document.createElement('option');
+                option.value = model.id;
+                option.textContent = model.name;
 
-            //     console.log('selectedBrand');
-            //     console.log(selectedBrand);
-            //     let modelSelect = outerElement.querySelector('#model_id');
-            //     modelSelect.innerHTML = '<option value="">Escolha um modelo</option>';
-
-            //     // add select options
-            //     selectedBrand.models.forEach(model => {
-            //         let option = document.createElement('option');
-            //         option.value = model.id;
-            //         option.textContent = model.name;
-
-            //         @if (old('model_id'))
-            //             if ({{ old('model_id') }} === model.id) {
-            //                 option.selected = true;
-            //             }
-            //         @else
-            //             vehicle.model.id
-            //         @endif
-            //         modelSelect.appendChild(option);
-            //     });
-            // }
+                // Check if the model ID matches the old('model_id') value
+                @if (old('model_id'))
+                    if ({{ old('model_id') }} === model.id) {
+                        option.selected = true;
+                    }
+                @endif
+                modelSelect.appendChild(option);
+                modelSelect.value = vehicle.model.id
+            });
         });
-    });
+    }
+
+    // Adiciona eventos de change no campo marca para atualizar modelos
+    document.addEventListener('DOMContentLoaded', setupUpdateModalListeners);
+
+    // Para abrir e já carregar marca e modelo
+    document.addEventListener("DOMContentLoaded", loadBrandAndModelFieldOnShow);
 </script>
