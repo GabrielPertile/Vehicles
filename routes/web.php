@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Modules\Vehicle\Presentation\Controller\BrandsController;
 use App\Modules\Vehicle\Presentation\Controller\ModelsController;
 use App\Modules\Vehicle\Presentation\Controller\VehiclesController;
+use App\Modules\Vehicle\Presentation\Controller\Web\VehiclesController as WebVehiclesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,8 @@ use App\Modules\Vehicle\Presentation\Controller\VehiclesController;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+
+Route::get('/', [WebVehiclesController::class, 'index'])->name('web.vehicles.index');
 
 // Route::get('/brands', [BrandsController::class, 'index']);
 
