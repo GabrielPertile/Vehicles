@@ -1,6 +1,13 @@
 {{-- Modal de cadastro --}}
 <div class="modal" tabindex="-1" id="brandModal">
-    @if (count($errors) > 0)
+    @if (count($errors) > 0 && old('id') == 'null')
+        <script>
+            // var oldData = {!! json_encode(old()) !!};
+            // console.log(oldData);
+            $(document).ready(function() {
+                $('#brandModal').modal('show');
+            });
+        </script>
     @endif
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,6 +19,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
+                        <input type="hidden" name="id" value="null" />
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
                             class="@error('name') is-invalid @enderror" value="{{ old('name') }}">

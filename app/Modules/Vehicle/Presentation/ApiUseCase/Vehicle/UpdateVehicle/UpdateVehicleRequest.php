@@ -20,7 +20,7 @@ class UpdateVehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|max:1000|nullable',
+            'description' => 'required|min:12|max:1000|nullable',
             'brand_id' => 'required|exists:brands,id',
             'model_id' => [
                 'required',
