@@ -17,7 +17,7 @@ return [
             'success' => 'Modelo cadastrado com sucesso.'
         ],
         'update' => [
-            'success' => 'Modelo atualizado com sucesso.'
+            'success' => 'Modelo atualizado com sucesso.',
         ],
         'destroy' => [
             'success' => 'Modelo removido com sucesso.'
