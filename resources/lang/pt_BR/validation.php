@@ -123,7 +123,8 @@ return [
         'name' => 'nome',
         'brand_id' => 'marca',
         'model' => 'modelo',
-        'model_id' => 'modelo'
+        'model_id' => 'modelo',
+        'image' => 'imagem'
     ],
     'validation_exception' => [
         'invalid' => 'Ops! Algumas informações estão erradas, por favor conferir.'
