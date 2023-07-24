@@ -30,10 +30,12 @@
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
                             class="@error('name') is-invalid @enderror"
-                            value="{{ old('name') ? old('name') : $brand->name }}">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            value="{{ (old('name') && $brand->id == old('id')) ? old('name') : $brand->name }}">
+                        @if (old('id') == $brand->id)
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

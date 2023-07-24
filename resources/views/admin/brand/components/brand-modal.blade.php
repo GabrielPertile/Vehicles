@@ -22,10 +22,13 @@
                         <input type="hidden" name="id" value="null" />
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
-                            class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            class="@error('name') is-invalid @enderror"
+                            @if (old('id') == 'null') value="{{ old('name') }}" @endif>
+                        @if (old('id') == 'null')
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
