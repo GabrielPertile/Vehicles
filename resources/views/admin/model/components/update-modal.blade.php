@@ -12,7 +12,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-black" id="updateModalLabel">Editar modelo - {{$model->name}}</h5>
+                <h5 class="modal-title text-black" id="updateModalLabel">Editar modelo - {{ $model->name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="modelForm" method="POST" action="{{ route('models.update', $model->id) }}">
@@ -24,10 +24,12 @@
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
                             class="@error('name') is-invalid @enderror"
-                            value="{{ old('name') ? old('name') : $model->name }}">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            value="{{ old('name') && $model->id == old('id') ? old('name') : $model->name }}">
+                        @if (old('id') == $model->id)
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="brand_id">Marca</label>
@@ -35,14 +37,16 @@
                             class="@error('brand_id') is-invalid @enderror">
                             <option value="">Escolha uma marca</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @selected(old('brand_id') ? old('brand_id') == $brand->id : $brand->id)>
+                                <option value="{{ $brand->id }}" @selected(old('brand_id') && $model->id == old('id') ? old('brand_id') == $brand->id : $brand->id)>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('brand_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == $model->id)
+                            @error('brand_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -55,8 +59,8 @@
 </div>
 
 <script>
-      // Para abrir e já carregar marca
-      document.addEventListener("DOMContentLoaded", function() {
+    // Para abrir e já carregar marca
+    document.addEventListener("DOMContentLoaded", function() {
         var myModal = document.getElementById("updateModal-{{ $model->id }}");
 
         myModal.addEventListener("shown.bs.modal", function() {
