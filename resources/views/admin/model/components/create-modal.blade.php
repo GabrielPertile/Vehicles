@@ -20,10 +20,13 @@
                     <div class="mb-3">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required
-                            class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            class="@error('name') is-invalid @enderror"
+                            @if (old('id') == 'null') value="{{ old('name') }}" @endif>
+                        @if (old('id') == 'null')
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="brand_id">Marca</label>
@@ -31,14 +34,17 @@
                             class="@error('brand_id') is-invalid @enderror">
                             <option value="">Escolha uma marca</option>
                             @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}" @selected(old('brand_id') == $brand->id)>
+                                <option value="{{ $brand->id }}"
+                                    @if (old('id') == 'null') @selected(old('brand_id') == $brand->id) @endif>
                                     {{ $brand->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('brand_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('brand_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
