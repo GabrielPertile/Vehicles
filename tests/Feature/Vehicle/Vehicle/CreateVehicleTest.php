@@ -21,11 +21,6 @@ class CreateVehicleTest extends TestCase
         'name' => 'Test Marca'
     ];
 
-    protected function createFile(string $type = 'jpeg', int $fileSize = 1024, string $mimeType = 'image/jpeg')
-    {
-        return UploadedFile::fake()->create('teste_file.' . $type, $fileSize, $mimeType);
-    }
-
     // use DatabaseTransactions;
     /**
      * Test cadastro de veículo enviando parâmetros vazios
