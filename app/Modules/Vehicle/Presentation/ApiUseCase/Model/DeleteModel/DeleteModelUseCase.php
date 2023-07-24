@@ -8,7 +8,7 @@ class DeleteModelUseCase
 {
     public function execute(int $id): void
     {
-        $model = ModelDao::find($id);
+        $model = ModelDao::findOrFail($id);
         $model->delete();
     }
 }

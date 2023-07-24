@@ -63,7 +63,7 @@ class BrandsController extends Controller
      */
     public function store(CreateBrandUseCase $useCase, CreateBrandRequest $request)
     {
-        return redirect()->route('brands.index')->with(CreateBrandResource::make($useCase->execute($request))->toArray($request))->withInput(['id' => null]);
+        return redirect()->back()->with(CreateBrandResource::make($useCase->execute($request))->toArray($request))->withInput(['id' => null]);
     }
 
     /**

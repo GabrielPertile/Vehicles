@@ -8,7 +8,7 @@ class DeleteBrandUseCase
 {
     public function execute(int $id): void
     {
-        $brand = BrandDao::find($id);
+        $brand = BrandDao::findOrFail($id);
         $brand->delete();
     }
 }
