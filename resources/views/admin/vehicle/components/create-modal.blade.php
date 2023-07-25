@@ -21,18 +21,22 @@
                         <label for="image">Imagem*</label>
                         <input type="file" class="form-control" required name="image" id="image"
                             accept="image/png, image/jpeg, image/jpg" value="{{ old('image') }}">
-                        @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('image')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="description">Descrição*</label>
                         <textarea type="text" class="form-control" id="description" name="description" required
                             class="@error('description') is-invalid @enderror" value="{{ old('description') }}">
                         </textarea>
-                        @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="brand_id">Marca*</label>
@@ -45,9 +49,11 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('brand_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('brand_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="model_id">Modelo*</label>
@@ -55,20 +61,24 @@
                             class="@error('model_id') is-invalid @enderror">
                             <option value="">Escolha um modelo</option>
                         </select>
-                        @error('model_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('model_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="price">Valor (R$)*</label>
 
-                        <input type="number" min="0.00" step="0.01" class="form-control" id="price"
+                        <input type="number" min="0.00" step="0.01" class="form-control" id="price" required
                             name="price" required class="@error('price') is-invalid @enderror"
                             value="{{ old('price') }}" />
                         </textarea>
-                        @error('price')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == 'null')
+                            @error('price')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

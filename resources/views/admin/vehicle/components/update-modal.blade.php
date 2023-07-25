@@ -29,6 +29,11 @@
                         @if ($vehicle->image)
                             <img class="mt-3" style="width: 10rem;" src="{{ $vehicle->image }}" />
                         @endif
+                        @if (old('id') == $vehicle->id)
+                            @error('image')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="description">Descrição*</label>
@@ -37,9 +42,11 @@
                             value="{{ old('description') ? old('description') : $vehicle->description }}">
                             {{ old('description') ? old('description') : $vehicle->description }}
                         </textarea>
-                        @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == $vehicle->id)
+                            @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="brand_id">Marca*</label>
@@ -52,19 +59,23 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('brand_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == $vehicle->id)
+                            @error('brand_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="model_id">Modelo*</label>
-                        <select class="form-select form-select-sm" name="model_id" id="model_id" required
+                        <select class="form-select form-select-sm" name="model_id" id="model_id"
                             class="@error('model_id') is-invalid @enderror">
                             <option value="">Escolha um modelo</option>
                         </select>
-                        @error('model_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == $vehicle->id)
+                            @error('model_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="price">Valor (R$)*</label>
@@ -73,9 +84,11 @@
                             name="price" required class="@error('price') is-invalid @enderror"
                             value="{{ old('price') ? old('price') : $vehicle->price }}" />
                         </textarea>
-                        @error('price')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @if (old('id') == $vehicle->id)
+                            @error('price')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
